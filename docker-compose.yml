@@ -1,13 +1,5 @@
 version: '3'
 services:
-    php-cli:
-        image: php:7.2-cli
-        links:
-           - mariadb
-        volumes:
-           - ./:/var/www/html:rw
-           - .docker/config/php-cli/zz-custom.ini:/usr/local/etc/php/conf.d/zz-custom.ini
-           - ~/.ssh:/home/netvlies/.ssh
 
     nginx:
         image: nginx:1.11.4
