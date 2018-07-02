@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Currency;
+use App\Entity\Form\ConverterFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -17,30 +20,36 @@ class HomepageController extends AbstractController
     /**
      * @Route("/", name="app_homepage")
      */
-    public function indexAction(){
+    public function indexAction(Request $request){
 
         $currencyOne = new Currency();
-        $currencyTwo = new Currency();
-
-        $currencyOne->setValue(1.5);
-        $currencyTwo->setValue(2.5);
 
         $currencyOne->setCurrencyName('Euro');
-        $currencyTwo->setCurrencyName('Dollar');
 
         //TODO: include listAction from CurrencyController and fetch data
 
-        $form1 = $this->createFormBuilder($currencyOne)
-            ->add('currencyName', ChoiceType::class,
-                array(
-                    'choices'  => array(
-                        'Euro' => null,
-                        'Dollar' => true,
-                        'No' => false,
-                    )))
-            ->add('Submit', SubmitType::class, array('label' => 'Convert Currency'))
-            ->getForm();
+        $form = $this->createForm(ConverterFormType::class);
 
-        return $this->render('homepage.html.twig', array('form1' => $form1,));
+        // only handles data on POST
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $userInputValue = $formData['currency_value'];
+            $userSelectedCurrency = $formData['currencyName'];
+
+            $currencyValuesObj = new CurrencyController();
+            $currencyName = $currencyValuesObj->getCurrencyAction($userSelectedCurrency);
+
+            $returnValue = $userInputValue * $userSelectedCurrency;
+
+            return $this->render('homepage.html.twig', array(
+                'calcValue' => $returnValue,
+                'userInputValue' => $userInputValue,
+                'currencyName' => $currencyName
+            ));
+        }
+
+        return $this->render('homepage.html.twig', array('form' => $form->createView()
+        ));
     }
 }

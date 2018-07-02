@@ -23,7 +23,7 @@ class Currency
     /**
      * @ORM\Column(type="float")
      */
-    protected $value;
+    protected $currency_value;
 
     /**
      * @ORM\Column(type="float")
@@ -70,17 +70,17 @@ class Currency
     /**
      * @return mixed
      */
-    public function getValue()
+    public function getCurrencyValue()
     {
-        return $this->value;
+        return $this->currency_value;
     }
 
     /**
-     * @param mixed $value
+     * @param mixed $currency_value
      */
-    public function setValue($value): void
+    public function setCurrencyValue($currency_value): void
     {
-        $this->value = $value;
+        $this->currency_value = $currency_value;
     }
 
     /**

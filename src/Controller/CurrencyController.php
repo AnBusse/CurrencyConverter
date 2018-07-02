@@ -13,10 +13,14 @@ class CurrencyController
 {
     const API_KEY = '579cf53f387105a2722afcd7df9ed6d9';
 
-
     public function listAction(){
-        $url = 'http://data.fixer.io/api/latest?'.self::API_KEY;
+        $url = 'http://data.fixer.io/api/latest?access_key='.self::API_KEY;
         $currencyValuesObj = json_decode(file_get_contents($url), true);
-        return $currencyValuesObj;
+        return $currencyValuesObj['rates'];
+    }
+
+    public function getCurrencyAction($val){
+        $currencyList = self::listAction();
+        return array_search($val, $currencyList);
     }
 }
