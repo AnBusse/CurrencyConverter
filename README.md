@@ -5,16 +5,16 @@ A small web application to convert currencies, fetching data from an API.
 This project runs best on Linux or MAC on PHP 7.1.
 
 ###How to get Started
-1. Clone the repository from https://github.com/AnBusse/CurrencyConverter
+1. Clone the repository from [GitHub](https://github.com/AnBusse/CurrencyConverter)
 2. Cd to the directory of the cloned project
-3. Copy .env.dist and name it .env
-4. At the DATABASE_URL, replace db_user, db_password and db_name with appropriate values (standardly, this is root, root, Symfony)
+3. Copy `.env.dist` file and name it .`env`
+4. At the `DATABASE_URL`, replace `db_user`, `db_password` and `db_name` with appropriate values (standardly, this is `root`, `root`, `Symfony`)
 5. Run composer install (you might have to install [Composer](https://getcomposer.org/download/) on your PC first) and provide standard values if prompted to do so. 
-    Make sure the database name corresponds to the one provided in the DATABASE_URL in .env                                                                    
-6. Run php bin/console server:start
-7. To create the database, run: php bin/console doctrine:database:create
+    Make sure the database name corresponds to the one provided in the `DATABASE_URL` in `.env`                                                                    
+6. Run `php bin/console server:start`
+7. To create the database, run: `php bin/console doctrine:database:create`
 8. Done: check out the application on [http://localhost:8000](http://localhost:8000)
-
+9. To stop the local webserver, simply run `php bin/console server:stop`
 
 ###Documentation
 
