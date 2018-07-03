@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Index{% endblock %}
+{% block title %}CurrencyConverter{% endblock %}
 {% block head %}
     {{ parent() }}
     <style type="text/css">
@@ -8,10 +8,7 @@
     </style>
 {% endblock %}
 {% block home_content %}
-    <h1>Index</h1>
-    <p class="important">
-        Welcome!
-    </p>
+    <h1>Welcome!</h1>
 
     {% if is_granted('ROLE_USER') %}
         {# show form #}
