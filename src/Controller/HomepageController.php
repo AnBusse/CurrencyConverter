@@ -26,8 +26,6 @@ class HomepageController extends AbstractController
 
         $currencyOne->setCurrencyName('Euro');
 
-        //TODO: include listAction from CurrencyController and fetch data
-
         $form = $this->createForm(ConverterFormType::class);
 
         // only handles data on POST
@@ -40,11 +38,6 @@ class HomepageController extends AbstractController
 
             $currencyValuesObj = new CurrencyController();
             $returnValue = $currencyValuesObj->convertAction($FromCurrency, $ToCurrency,$userInputValue);
-
-            dump($returnValue);
-            dump($userInputValue);
-            dump($FromCurrency);
-            dump($ToCurrency);
 
             return $this->render('homepage.html.twig', array(
                 'calcValue' => $returnValue['result'],
