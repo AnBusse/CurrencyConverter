@@ -17,16 +17,17 @@
         {# show form #}
 
         {% if calcValue is defined %}
-            <p>{{ userInputValue }} &euro; equals to {{ calcValue }} in {{ currencyName }}</p>
+            <p>{{ userInputValue }} {{ currencyFrom }} equals to {{ calcValue }} in {{ currencyTo }}</p>
             <a href="{{ path('app_homepage') }}">Home</a>
         {% else %}
             {{ form_start(form) }}
             {{ form_errors(form) }}
 
-            <p class="form">{{ form_row(form.currency_value, { 'label': 'How much Euros are' }) }}</p>
-            <p class="form">{{ form_row(form.currencyName,{ 'label': 'Select a currency below' }) }}</p>
+            <p class="form">{{ form_row(form.currencyFrom,{ 'label': 'Select the currency you want to convert FROM' }) }}</p>
+            <p class="form">{{ form_row(form.currency_value, { 'label': 'How much of it do you have?' }) }}</p>
+            <p class="form">{{ form_row(form.currencyTo,{ 'label': 'Select the currency you want to convert TO' }) }}</p>
 
-            {{ form_row(form.Submit, { 'label': 'Convert to Euro' }) }}
+            {{ form_row(form.Submit, { 'label': 'Convert' }) }}
             {{ form_end(form) }}
         {% endif %}
 

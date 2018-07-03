@@ -25,9 +25,13 @@ class ConverterFormType extends AbstractType
 
         $form1 = $builder
             ->add('currency_value', NumberType::class)
-            ->add('currencyName', ChoiceType::class,
+            ->add('currencyFrom', ChoiceType::class,
                 array(
                     'choices'  => $currencyList
+                ))
+            ->add('currencyTo', ChoiceType::class,
+                array(
+                    'choices' => $currencyList
                 ))
             ->add('Submit', SubmitType::class)
             ->getForm();

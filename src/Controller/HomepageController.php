@@ -35,17 +35,22 @@ class HomepageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
             $userInputValue = $formData['currency_value'];
-            $userSelectedCurrency = $formData['currencyName'];
+            $FromCurrency = $formData['currencyFrom'];
+            $ToCurrency = $formData['currencyTo'];
 
             $currencyValuesObj = new CurrencyController();
-            $currencyName = $currencyValuesObj->getCurrencyAction($userSelectedCurrency);
+            $returnValue = $currencyValuesObj->convertAction($FromCurrency, $ToCurrency,$userInputValue);
 
-            $returnValue = $userInputValue * $userSelectedCurrency;
+            dump($returnValue);
+            dump($userInputValue);
+            dump($FromCurrency);
+            dump($ToCurrency);
 
             return $this->render('homepage.html.twig', array(
-                'calcValue' => $returnValue,
+                'calcValue' => $returnValue['result'],
                 'userInputValue' => $userInputValue,
-                'currencyName' => $currencyName
+                'currencyFrom' => $FromCurrency,
+                'currencyTo' => $ToCurrency
             ));
         }
 
